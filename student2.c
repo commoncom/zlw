@@ -57,11 +57,11 @@ int main()
         scanf("%d %s %d", students[i].id, students[i].name, students[i].seet);
         seets[i] = seet;
     }
-    arr = sort(seets);  // 查找数组中重复的元素和未使用的位置,记录到一个数组中
+    arr, unused = sort(seets);  // 查找数组中重复的元素和未使用的位置,记录到一个数组中
     for (i = 0; i < n; i++) {
         if inArray(students[i], arr, n) {
             // 调整位置，将其插入空闲位置
-
+            students[i] = unused[]; // 赋予第一个值
         }
     }
     return 0;
@@ -87,7 +87,7 @@ int sort(int seets[N]) {
         }
     }
     // 记录重复位置以及未使用的位置
-    int b[N] = {0};
+    int b[N] = {0}; // 用动态数组
     for (int i=1; i < N; i++) {
         if (seets[i] == seets[i-1]) { // 记录重复位置
             arr[k] = seet[i-1];
@@ -95,8 +95,14 @@ int sort(int seets[N]) {
             k++;
         }
         // TODO 未使用的位置如何记录？
+        // 遍历已经排好序的位置，当座位号不是按照序号的时候，说明该位置缺失
+        // 记录缺失的号
+        if seets[i] != i+1 {
+            b[j++] = i+1;
+        }
     }
-    return arr
+    return arr, b
 }
+
 
 
